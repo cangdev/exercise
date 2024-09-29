@@ -15,8 +15,8 @@ then
     exit 1
 else
 
-	echo "....................STARTING $APPLICATION_NAME........................"
+        echo "....................STARTING $APPLICATION_NAME........................"
     mkdir -p ./logs # Create logs directory if it doesn't exist
-    nohup java -jar "$JAR_PATH" > "$LOG_FILE" 2>&1 &
+    nohup /appdata/jdk/jdk-17.0.11/bin/java -jar -Dapplication=$APPLICATION_NAME "$JAR_PATH" > "$LOG_FILE" 2>&1 &
     echo "....................$APPLICATION_NAME STARTED........................."
 fi
