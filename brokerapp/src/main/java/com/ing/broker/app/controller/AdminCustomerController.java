@@ -1,5 +1,7 @@
 package com.ing.broker.app.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,18 +18,22 @@ import com.ing.broker.app.service.CustomerService;
 @RestController
 @RequestMapping("/api/admin/customers")
 public class AdminCustomerController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(AdminCustomerController.class);
 
 	@Autowired
     private CustomerService customerService;
 
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody CustomerRequest customerRequest) {
+    	logger.info("New createCustomer request. customerRequest: {}", customerRequest);
         Customer createdCustomer = customerService.createCustomer(customerRequest);
         return ResponseEntity.ok(createdCustomer);
     }
 
     @GetMapping
     public ResponseEntity<Customer> getCustomer(@RequestParam Long customerId) {
+    	logger.info("New getCustomer request. customerId: {}", customerId);
         Customer customer = customerService.getCustomerById(customerId);
         return ResponseEntity.ok(customer);
     }

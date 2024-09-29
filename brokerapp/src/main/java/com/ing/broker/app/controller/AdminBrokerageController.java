@@ -3,6 +3,8 @@ package com.ing.broker.app.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,14 +28,17 @@ import com.ing.broker.app.service.BrokerageService;
 @RequestMapping("/api/admin/brokerage")
 public class AdminBrokerageController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(AdminBrokerageController.class);
+	
 	@Autowired
 	private BrokerageService brokerageService;
 
 	// Endpoint to create a new order
 	@PostMapping("/order")
 	public ResponseEntity<CustomerOrder> createOrder(@RequestBody CustomerOrderRequest customerOrderRequest) {
-
-		System.out.println("New CustomerOrder Request. customerOrderDto: " + customerOrderRequest.toString());
+		
+		logger.info("New createOrder Request. customerOrderRequest: " + customerOrderRequest.toString());
+		
 		CustomerOrder order = brokerageService.createOrder(customerOrderRequest.getCustomerId(),
 															customerOrderRequest.getAsset(),
 															OrderSide.valueOf(customerOrderRequest.getSide().toUpperCase()),
@@ -49,7 +54,7 @@ public class AdminBrokerageController {
 	@GetMapping("/orders")
 	public ResponseEntity<List<CustomerOrder>> listOrders(@RequestParam Long customerId) {
 
-		System.out.println("New CustomerOrder request. customerId:" + customerId);
+		logger.info("New CustomerOrder request. customerId:" + customerId);
 		List<CustomerOrder> orders = brokerageService.listOrders(customerId);
 
 		return ResponseEntity.ok(orders);
@@ -62,7 +67,7 @@ public class AdminBrokerageController {
 																@RequestParam LocalDateTime startDate, 
 																@RequestParam LocalDateTime endDate) {
 		
-		System.out.println("New CustomerOrder request. customerId:" + customerId + " startDate:" + startDate + " endDate:" + endDate);
+		logger.info("New CustomerOrder request. customerId:" + customerId + " startDate:" + startDate + " endDate:" + endDate);
 		List<CustomerOrder> orders = brokerageService.listOrdersByDate(customerId, startDate, endDate);
 		
 		return ResponseEntity.ok(orders);
@@ -73,7 +78,7 @@ public class AdminBrokerageController {
 	@DeleteMapping("/order/{id}")
 	public ResponseEntity<String> cancelOrder(@PathVariable Long id) {
 
-		System.out.println("New CancelOrder request. orderID:" + id);
+		logger.info("New CancelOrder request. orderID:" + id);
 		brokerageService.cancelOrder(id);
 		
 		return ResponseEntity.ok(id + " Deleted.");
@@ -82,7 +87,8 @@ public class AdminBrokerageController {
 	// Endpoint to deposit money for a customer
 	@PostMapping("/deposit")
 	public ResponseEntity<Transaction> depositMoney(@RequestBody DepositMoneyRequest depositMoneyRequest) {
-
+		
+		logger.info("New depositMoney request. depositMoneyRequest:" + depositMoneyRequest);
 		Transaction transaction = brokerageService.depositMoney(depositMoneyRequest.getCustomerId(), depositMoneyRequest.getAmount());
 		
 		return ResponseEntity.ok(transaction);
@@ -93,10 +99,7 @@ public class AdminBrokerageController {
 	@PostMapping("/withdraw")
 	public ResponseEntity<Transaction> withdrawMoney(@RequestBody WithdrawMoneyRequest withdrawMoneyRequest) {
 		
-		if (!withdrawMoneyRequest.getIban().matches("^[A-Z]{2}\\d{2}[A-Z0-9]{1,30}$")) {
-		    throw new IllegalArgumentException("Invalid IBAN format");
-		}
-
+		logger.info("New withdrawMoney request. depositMoneyRequest:" + withdrawMoneyRequest);
 		Transaction transaction = brokerageService.withdrawMoney(withdrawMoneyRequest.getCustomerId(), withdrawMoneyRequest.getAmount(), withdrawMoneyRequest.getIban());
 
 		return ResponseEntity.ok(transaction);
@@ -107,6 +110,7 @@ public class AdminBrokerageController {
 	@GetMapping("/assets")
 	public ResponseEntity<List<Transaction>> listAssets(@RequestParam Long customerId) {
 
+		logger.info("New listAssets request. customerId: {}", customerId);
 		List<Transaction> transactions = brokerageService.listAssets(customerId);
 
 		return ResponseEntity.ok(transactions);

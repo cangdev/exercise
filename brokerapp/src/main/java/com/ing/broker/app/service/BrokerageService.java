@@ -31,17 +31,15 @@ public class BrokerageService {
     // Create a new order for a customer
     public CustomerOrder createOrder(Long customerId, String asset, OrderSide side, int size, double price) {
     	
-        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new IllegalArgumentException("Customer not found with ID: " + customerId));
+        Customer customer = findCustomerById(customerId);
         
         double amount = size * price;
         
         //OrderSide Control
-        if (side == OrderSide.BUY) {
-        	// Withdraw money if the side is BUY
-            withdrawMoney(customerId, amount, null); 	
-        } else if (side == OrderSide.SELL) {
-        	// Deposit money if the side is SELL
-            depositMoney(customerId, amount); 			
+        if (side.equals(OrderSide.BUY)) {
+            executeBuyOrder(customerId, amount); 	
+        } else if (side.equals(OrderSide.SELL)) {
+        	executeSellOrder(customerId, amount); 			
         }
         
         CustomerOrder order = new CustomerOrder(null, customer, asset, side, size, price, OrderStatus.PENDING, LocalDateTime.now());
@@ -85,7 +83,7 @@ public class BrokerageService {
             throw new IllegalArgumentException("Withdraw amount cannot be negative: " + amount);
         }
     	
-        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new IllegalArgumentException("Customer not found with ID: " + customerId));
+        Customer customer = findCustomerById(customerId);
         customer.setBalance(customer.getBalance() + amount);
         customerRepository.save(customer);
         
@@ -100,8 +98,13 @@ public class BrokerageService {
         if (amount < 0) {
             throw new IllegalArgumentException("Withdraw amount cannot be negative: " + amount);
         }
+        
+        // Check: If iban is valid format.
+		if (!iban.matches("^[A-Z]{2}\\d{2}[A-Z0-9]{1,30}$")) {
+		    throw new IllegalArgumentException("Invalid IBAN format. iban" + iban);
+		}
     	
-        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new IllegalArgumentException("Customer not found with ID: " + customerId));
+        Customer customer = findCustomerById(customerId);
         
         // Check: If insufficient balance, throw an error
         if (customer.getBalance() < amount) {
@@ -116,7 +119,47 @@ public class BrokerageService {
 
     // List all assets (transactions) for a specific customer
     public List<Transaction> listAssets(Long customerId) {
-        return transactionRepository.findByCustomerId(customerId);
+    	return transactionRepository.findByCustomerId(customerId);
+    }
+    
+    // Buy order. If request is valid, update customer's balance.
+    public Customer executeBuyOrder(Long customerId, double amount) {
+    	
+    	// Check: If amount is negative, throw an error. Otherwise, balance will be increased.
+        if (amount < 0) {
+            throw new IllegalArgumentException("Amount cannot be negative: " + amount);
+        }
+        
+        Customer customer = findCustomerById(customerId);
+        
+        // Check: If insufficient balance, throw an error
+        if (customer.getBalance() < amount) {
+            throw new IllegalArgumentException("Insufficient balance for customer ID: " + customerId);
+        }
+        
+        customer.setBalance(customer.getBalance() - amount);
+        return customerRepository.save(customer);
+        
+    }
+    
+    // Sell order. If request is valid, update customer's balance.
+    public Customer executeSellOrder(Long customerId, double amount) {
+    	
+    	// Check: If amount is negative, throw an error.
+        if (amount < 0) {
+            throw new IllegalArgumentException("Withdraw amount cannot be negative: " + amount);
+        }
+    	
+        Customer customer = findCustomerById(customerId);
+        customer.setBalance(customer.getBalance() + amount);
+        return customerRepository.save(customer);
+        
+    }
+
+    
+    private Customer findCustomerById(Long customerId) {
+        return customerRepository.findById(customerId)
+            .orElseThrow(() -> new IllegalArgumentException("Customer not found with ID: " + customerId));
     }
 
 

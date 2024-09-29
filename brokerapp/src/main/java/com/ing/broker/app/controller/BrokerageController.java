@@ -44,7 +44,6 @@ public class BrokerageController {
         String username = authentication.getName();
         logger.info("New createOrder Request. customerOrderDto: {} || username: {}", customerOrderRequest, username);
 
-
 		CustomerOrder order = brokerageService.createOrder(	customerOrderRequest.getCustomerId(),
 															customerOrderRequest.getAsset(),
 															OrderSide.valueOf(customerOrderRequest.getSide().toUpperCase()),
@@ -106,10 +105,6 @@ public class BrokerageController {
 	public ResponseEntity<Transaction> withdrawMoney(@RequestBody WithdrawMoneyRequest withdrawMoneyRequest) {
 		
 		logger.info("New withdrawMoney request. withdrawMoneyRequest: {}", withdrawMoneyRequest);
-		if (!withdrawMoneyRequest.getIban().matches("^[A-Z]{2}\\d{2}[A-Z0-9]{1,30}$")) {
-		    throw new IllegalArgumentException("Invalid IBAN format");
-		}
-
 		Transaction transaction = brokerageService.withdrawMoney(withdrawMoneyRequest.getCustomerId(), withdrawMoneyRequest.getAmount(), withdrawMoneyRequest.getIban());
 
 		return ResponseEntity.ok(transaction);
