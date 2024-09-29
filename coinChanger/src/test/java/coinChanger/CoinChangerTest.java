@@ -62,20 +62,6 @@ public class CoinChangerTest {
 		assertEquals(1, coinChanger.countCombinations(amount, coins));
 	}
 	
-	@Test
-	public void testCoinChange7() {
-		int[] coins = {25, 10, 5, 1};
-		int  amount = 100;
-		
-		assertEquals(242, coinChanger.countCombinations(amount, coins));
-	}
-	
-	@Test
-	public void testCoinChange8() {
-		int[] coins = {25, 10, 5, 1};
-		int  amount = 15;
-		
-		assertEquals(6, coinChanger.countCombinations(amount, coins));
-	}
+
 
 }

@@ -6,7 +6,7 @@ public class CoinChanger {
 	private final static int dime 		= 10;
 	private final static int nickel 	= 5;
 	private final static int penny 		= 1;
-
+	
 	public static void main(String[] args) {
 		
 		long s = System.currentTimeMillis();
@@ -30,10 +30,18 @@ public class CoinChanger {
 			for (int i = coin; i <= amount; i++) {
 				
 				combinations[i] += combinations[i - coin];
+				printAmount(combinations);
 			}
 		}
 		
 		return combinations[amount];
 	}
 	
+	// Prints out the array.
+	public static void printAmount(int[] arr) {
+		for (int i = 0; i< arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+	}
 }
