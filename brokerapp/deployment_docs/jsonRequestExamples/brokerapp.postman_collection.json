@@ -1,0 +1,720 @@
+{
+	"info": {
+		"_postman_id": "9e014ea3-0970-403e-9a46-031bfcbc6814",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14916075"
+	},
+	"item": [
+		{
+			"name": "brokerapp-Requests",
+			"item": [
+				{
+					"name": "1 - Create Customer AHMET DURSUN",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"AHMET DURSUN\",\r\n  \"balance\": 1000.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.117.36:9090/api/admin/customers",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"117",
+								"36"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"admin",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1 - Create Customer ILHAN MANSIZ",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "userpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"ILHAN MANSIZ\",\r\n  \"balance\": 1903.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.117.36:9090/api/user/customers",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"117",
+								"36"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"user",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2- Get Customer AHMET DURSUN",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.117.36:9090/api/admin/customers?customerId=1",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"117",
+								"36"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"admin",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2- Get Customer ILHAN MANSIZ",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "userpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.117.36:9090/api/user/customers?customerId=2",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"117",
+								"36"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"user",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3- Create Order AHMET DURSUN",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t  \"customerId\": 1,\r\n\t  \"asset\": \"BJK\",\r\n\t  \"side\": \"BUY\",\r\n\t  \"size\": 1,\r\n\t  \"price\": 20.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.117.36:9090/api/user/brokerage/order",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"117",
+								"36"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"user",
+								"brokerage",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3- Create Order ILHAN MANSIZ",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "userpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t  \"customerId\": 2,\r\n\t  \"asset\": \"BMW\",\r\n\t  \"side\": \"BUY\",\r\n\t  \"size\": 2,\r\n\t  \"price\": 200.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.117.36:9090/api/user/brokerage/order",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"117",
+								"36"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"user",
+								"brokerage",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4- Get Orders By Date",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.117.36:9090/api/admin/brokerage/ordersByDate?customerId=1&startDate=2024-09-27T14:30:00&endDate=2024-09-30T14:30:00",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"117",
+								"36"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"admin",
+								"brokerage",
+								"ordersByDate"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "1"
+								},
+								{
+									"key": "startDate",
+									"value": "2024-09-27T14:30:00"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-09-30T14:30:00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5-Delete Order",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.117.36:9090/api/admin/brokerage/order/3",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"117",
+								"36"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"admin",
+								"brokerage",
+								"order",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6- Deposit Money AHMET DURSUN",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": 1,\r\n  \"amount\": 200.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.117.36:9090/api/admin/brokerage/deposit",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"117",
+								"36"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"admin",
+								"brokerage",
+								"deposit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6- Deposit Money ILHAN MANSIZ",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": 2,\r\n  \"amount\": 10.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/admin/brokerage/deposit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"brokerage",
+								"deposit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7- Withdraw Money AHMET DURSUN",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": 1,\r\n  \"amount\": 80.00,\r\n  \"iban\": \"TR1903190319031903\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.117.36:9090/api/admin/brokerage/withdraw",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"117",
+								"36"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"admin",
+								"brokerage",
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7- Withdraw Money ILHAN MANSIZ",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": 2,\r\n  \"amount\": 80.00,\r\n  \"iban\": \"TR1903190319031903\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/admin/brokerage/withdraw",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"brokerage",
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8- List Assets AHMET DURSUN",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.117.36:9090/api/admin/brokerage/assets?customerId=1",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"117",
+								"36"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"admin",
+								"brokerage",
+								"assets"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8- List Assets ILHAN MANSIZ",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/brokerage/assets?customerId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"brokerage",
+								"assets"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9-HelathCheck",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/actuator/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
