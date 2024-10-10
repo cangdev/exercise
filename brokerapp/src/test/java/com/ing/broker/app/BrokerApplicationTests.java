@@ -28,19 +28,20 @@ public class BrokerApplicationTests {
 
 	@Test
 	public void testCreateCustomer() throws Exception {
-		// Given: Create a sample CustomerRequest
+		
+		// Create a Request to create a customer (sample CustomerRequest)
 		CustomerRequest customerRequest = new CustomerRequest();
 		customerRequest.setName("AHMET DURSUN");
 		customerRequest.setBalance(1903);
 
 		// Create a mock customer that the service will return
-		Customer createdCustomer = new Customer();
-		createdCustomer.setId(1L); // Setting an ID to simulate a created customer
-		createdCustomer.setName(customerRequest.getName());
-		createdCustomer.setBalance(customerRequest.getBalance());
+		Customer mockCustomer = new Customer();
+		mockCustomer.setId(1L); // Setting an ID to simulate a created customer
+		mockCustomer.setName(customerRequest.getName());
+		mockCustomer.setBalance(customerRequest.getBalance());
 
 		// When: Mock the behavior of customerService.createCustomer
-		when(customerService.createCustomer(customerRequest)).thenReturn(createdCustomer);
+		when(customerService.createCustomer(customerRequest)).thenReturn(mockCustomer);
 
 		// Act: Call the createCustomer method in the controller
 		ResponseEntity<Customer> responseEntity = customerController.createCustomer(customerRequest);
@@ -48,15 +49,16 @@ public class BrokerApplicationTests {
 		// Then: Verify the response
 		assertNotNull(responseEntity);
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(responseEntity.getBody()).isEqualTo(createdCustomer);
+		assertThat(responseEntity.getBody()).isEqualTo(mockCustomer);
 
 		// Optional: Print the response for debugging
-		System.out.println("createdCustomer: " + createdCustomer.toString());
+		System.out.println("createdCustomer: " + mockCustomer.toString());
 		System.out.println("responseEntity.getBody(): " + responseEntity.getBody());
 
 		// Further assertions
 		assertEquals("AHMET DURSUN", responseEntity.getBody().getName());
 		assertEquals(1903, responseEntity.getBody().getBalance());
+		
 	}
 
 }
