@@ -5,9 +5,10 @@ liveBet is a live betting application built using Java 17 and Spring Boot 3.3.4.
 
 Features
 --------
-- Real-time match odds updates.
+- Real-time (Random) match odds updates.
 - Multi-betting support for up to 500 bets per match.
 - Odds freeze and timeout mechanism for placed bets.
+- Coupons are added to DelayQueue, if is not placed in a period, coupon status will be expired.  
 - Periodic updates using Spring's @Scheduled annotation.
 
 Technologies
