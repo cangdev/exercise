@@ -1,0 +1,17 @@
+package com.cantest.liveBet.request;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class MatchBetRequest {
+	
+	private Long matchId;
+	private String betType;		// HOME_WIN, DRAW, AWAY_WIN		==> Bet option for each match
+
+}
