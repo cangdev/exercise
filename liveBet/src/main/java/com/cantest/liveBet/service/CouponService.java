@@ -12,11 +12,11 @@ public interface CouponService {
 	public Coupon placeBet(Long couponId);
 	
 	// GET
-    public List<Coupon> getAllCoupons();
-    public Optional<Coupon> getCouponById(Long couponId);
-
-    // DELETE
-    public boolean deleteCoupon(Long id);
+	public List<Coupon> getAllCoupons();
+	public Optional<Coupon> getCouponById(Long couponId);
+	
+	// DELETE
+	public boolean deleteCoupon(Long id);
 
     
 }

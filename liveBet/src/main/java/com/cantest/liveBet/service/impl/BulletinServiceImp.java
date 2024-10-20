@@ -26,7 +26,7 @@ public class BulletinServiceImp implements BulletinService {
 	private final ExceptionMessage exceptionMessage;
 	
 	// Logger for this service
-    private static final Logger logger = LoggerFactory.getLogger(BulletinServiceImp.class);
+	private static final Logger logger = LoggerFactory.getLogger(BulletinServiceImp.class);
 
     @Autowired
     public BulletinServiceImp(BulletinRepository bulletinRepository, BulletinMapper bulletinMapper, ExceptionMessage exceptionMessage) {

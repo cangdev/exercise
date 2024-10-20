@@ -24,9 +24,9 @@ public class CouponServiceImp implements CouponService {
 	private final CouponRepository couponRepository;
 	private final ExceptionMessage exceptionMessage;
 	
-
+	
 	// Logger for this service
-    private static final Logger logger = LoggerFactory.getLogger(CouponServiceImp.class);
+	private static final Logger logger = LoggerFactory.getLogger(CouponServiceImp.class);
     
     @Autowired
     public CouponServiceImp(CouponRepository couponRepository, ExceptionMessage exceptionMessage) {

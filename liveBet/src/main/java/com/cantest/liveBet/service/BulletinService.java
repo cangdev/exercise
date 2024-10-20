@@ -10,12 +10,12 @@ public interface BulletinService {
 
 	// POST
 	public Bulletin addBulletin(BulletinRequest bulletinRequest);
-    
+	
 	// GET
 	public List<Bulletin> getAllBulletins();
-    public Optional<Bulletin> getBulletinById(Long id);
-
-    // DELETE
-    public boolean deleteBulletin(Long id);
+	public Optional<Bulletin> getBulletinById(Long id);
+	
+	// DELETE
+	public boolean deleteBulletin(Long id);
     
 }

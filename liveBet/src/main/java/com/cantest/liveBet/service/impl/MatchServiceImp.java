@@ -37,15 +37,15 @@ public class MatchServiceImp implements MatchService {
 	
 	private final ExceptionMessage exceptionMessage;
 	
-    private final Random random = new Random();
-    
-    private static final DecimalFormat decimalFormat;
-
-    static {
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-        symbols.setDecimalSeparator('.'); 							// Set decimal separator as dot
-        decimalFormat = new DecimalFormat("#.##", symbols);
-    }
+	private final Random random = new Random();
+	
+	private static final DecimalFormat decimalFormat;
+	
+	static {
+	    DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+	    symbols.setDecimalSeparator('.'); 							// Set decimal separator as dot
+	    decimalFormat = new DecimalFormat("#.##", symbols);
+	}
     
     
     // Logger for this service
@@ -91,21 +91,21 @@ public class MatchServiceImp implements MatchService {
     }
     
 	public MatchResponse addMatchToBulletin(Long bulletinId, Match match) {
-
+	
 		Optional<Bulletin> bulletinOptional = bulletinRepository.findById(bulletinId);
 		validateBulletin(bulletinOptional, bulletinId);
-
+	
 		Bulletin bulletin = bulletinOptional.get();
 		match.setBulletin(bulletin);
 		Match savedMatch = matchRepository.save(match); 			// so the primary key is not returned
 		MatchResponse matchResponse = MatchMapper.mapToMatchResponse(savedMatch, new MatchResponse());
-
+	
 		// If Mac Added
 		logger.info("Match '{}' between {} and {} added to Bulletin '{}'", 
 				match.getId(), match.getHomeTeam(), match.getAwayTeam(), bulletinOptional.get().getName());
-
+	
 		return matchResponse;
-
+	
 	}
     
     // Generate new odds by adding a random value
