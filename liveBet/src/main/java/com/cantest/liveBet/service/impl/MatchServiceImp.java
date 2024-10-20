@@ -60,7 +60,7 @@ public class MatchServiceImp implements MatchService {
     }
     
     // Method to update match odds every second
-    @Scheduled(fixedRate = SystemConstants.COUPON_TIMEOUT_DURATION)
+    @Scheduled(fixedRate = SystemConstants.ODDS_UPDATE_DURATION)
     public void updateMatchOdds() {
     	
         List<Match> matches = matchRepository.findAll(); 			// Fetch all matches from the database

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.cantest.liveBet.component.QueueComponent;
+import com.cantest.liveBet.exception.CouponAlreadyExistException;
+import com.cantest.liveBet.exception.CouponAlreadyPlacedException;
 import com.cantest.liveBet.exception.CouponNotFoundException;
 import com.cantest.liveBet.exception.ExceptionMessage;
 import com.cantest.liveBet.mapper.CouponMapper;
@@ -124,4 +126,21 @@ public class CouponController {
         		.body(ex.getMessage());
     }
     
+    // Handles the CouponAlreadyExistException thrown when a coupon with the same couponId already exists.
+    @ExceptionHandler(CouponAlreadyExistException.class)
+    public ResponseEntity<String> handleCouponAlreadyExistException(CouponAlreadyExistException ex) {
+        logger.error("Error: {}", ex.getMessage());
+        return ResponseEntity
+        		.status(HttpStatus.CONFLICT) // 409 Conflict
+        		.body(ex.getMessage());
+    }
+    
+    // Handles the CouponAlreadyPlacedException thrown when a coupon has already placed (if CouponStatus is Confirmed).
+    @ExceptionHandler(CouponAlreadyPlacedException.class)
+    public ResponseEntity<String> handleCouponAlreadyPlacedException(CouponAlreadyPlacedException ex) {
+    	logger.error("Error: {}", ex.getMessage());
+    	return ResponseEntity
+    			.status(HttpStatus.CONFLICT) // 409 Conflict
+    			.body(ex.getMessage());
+    }
 }

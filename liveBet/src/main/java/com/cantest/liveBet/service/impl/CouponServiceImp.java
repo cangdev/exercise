@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.cantest.liveBet.exception.CouponAlreadyExistException;
+import com.cantest.liveBet.exception.CouponAlreadyPlacedException;
 import com.cantest.liveBet.exception.CouponExpiredException;
 import com.cantest.liveBet.exception.CouponNotFoundException;
 import com.cantest.liveBet.exception.ExceptionMessage;
@@ -47,9 +47,9 @@ public class CouponServiceImp implements CouponService {
 				.orElseThrow(() -> new CouponNotFoundException(exceptionMessage.getCouponNotFoundExceptionMessage(LocaleContextHolder.getLocale())));
 
 		// COUPON_ALREADY_PLACED Control
-		if (couponRepository.existsById(coupon.getId())) {
-			logger.error(exceptionMessage.getCouponAlreadyExistExceptionMessage(LocaleContextHolder.getLocale()) + coupon.getId());
-			throw new CouponAlreadyExistException(exceptionMessage.getCouponAlreadyExistExceptionMessage(LocaleContextHolder.getLocale()) + coupon.getId());
+		if (coupon.getCouponStatus().equals(CouponStatus.CONFIRMED)) {
+			logger.error(exceptionMessage.getCouponAlreadyPlacedExceptionMessage(LocaleContextHolder.getLocale()) + coupon.getId());
+			throw new CouponAlreadyPlacedException(exceptionMessage.getCouponAlreadyPlacedExceptionMessage(LocaleContextHolder.getLocale()) + coupon.getId());
 		}
 
 		// COUPON_EXPIRED Control

@@ -26,6 +26,10 @@ public class ExceptionMessage {
 		return messageSource.getMessage("coupon.already.exist.msg", null, locale);
 	}
 	
+	public String getCouponAlreadyPlacedExceptionMessage(Locale locale) {
+		return messageSource.getMessage("coupon.already.placed.msg", null, locale);
+	}
+	
 	public String getMaxCouponExceptionMessage(Locale locale) {
 		return messageSource.getMessage("max.coupon.err.msg", null, locale);
 	}
