@@ -42,7 +42,7 @@ public class CouponServiceImp implements CouponService {
         return couponRepository.save(coupon);
     }
 
-	public Coupon placeBet(Long couponId) {
+	public synchronized Coupon placeBet(Long couponId) {
 		Coupon coupon = getCouponById(couponId)
 				.orElseThrow(() -> new CouponNotFoundException(exceptionMessage.getCouponNotFoundExceptionMessage(LocaleContextHolder.getLocale())));
 

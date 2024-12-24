@@ -82,7 +82,7 @@ public class BrokerageServiceImpl implements BrokerageService {
 
     // Deposit money for a customer
     @Override
-    public Transaction depositMoney(Long customerId, double amount) {
+    public synchronized Transaction depositMoney(Long customerId, double amount) {
     	
     	// Check: If amount is negative, throw an error.
         if (amount < 0) {
@@ -99,7 +99,7 @@ public class BrokerageServiceImpl implements BrokerageService {
 
     // Withdraw money from a customer's account
     @Override
-    public Transaction withdrawMoney(Long customerId, double amount, String iban) {
+    public synchronized Transaction withdrawMoney(Long customerId, double amount, String iban) {
     	
     	// Check: If amount is negative, throw an error. Otherwise, balance will be increased.
         if (amount < 0) {
